@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Absen — Web Developer spesialis front-end & full-stack berbasis di Depok, Indonesia." />
+  <meta property="og:title" content="Absen — Web Developer" />
+  <meta property="og:description" content="Spesialis front-end & full-stack dengan passion terhadap performa, aksesibilitas, dan user experience." />
+  <meta property="og:type" content="website" />
+  <title>Absen — Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAFAF7;
+      --ink: #1A1A18;
+      --muted: #6B6B66;
+      --accent: #2D5BE3;
+      --accent-light: #EEF2FD;
+      --border: #E4E4DF;
+      --white: #ffffff;
+      --radius-pill: 100px;
+      --radius-card: 16px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-hover: 0 12px 40px rgba(0,0,0,0.09);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Scroll Progress Bar ─────────────────────── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Navigation ──────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(250,250,247,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-links a.active::after,
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .nav-cta:hover { opacity: 0.82; transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 4px;
+      border: none;
+      background: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 2.5rem 1rem;
+    }
+
+    .mobile-menu a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--ink); }
+    .mobile-menu.open { display: flex; }
+
+    /* ── Hero ────────────────────────────────────── */
+    .hero {
+      padding: 5rem 2.5rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content { max-width: 520px; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      color: var(--ink);
+    }
+
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-sub {
+      font-size: 15.5px;
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: 2.25rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity var(--transition), transform var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    /* Avatar */
+    .hero-avatar {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .avatar-ring {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #dde8fb 100%);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .avatar-initials {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.5rem;
+      color: var(--accent);
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+
+    .avatar-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+    }
+
+    .avatar-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 5px 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      white-space: nowrap;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ── Stats Bar ───────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 0 2.5rem;
+      overflow: hidden;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 1.25rem 2rem;
+      border-right: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .stat:last-child { border-right: none; }
+    .stat:hover { background: rgba(45, 91, 227, 0.03); }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Sections ────────────────────────────────── */
+    section {
+      padding: 4rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── About ───────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-text strong { color: var(--ink); font-weight: 500; }
+
+    .about-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .about-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .about-detail-item i {
+      font-size: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .about-detail-label {
+      font-size: 10.5px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .about-detail-val {
+      font-weight: 500;
+      color: var(--ink);
+      font-size: 12.5px;
+    }
+
+    /* ── Skills ──────────────────────────────────── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      transition: all var(--transition);
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); transform: translateY(-1px); }
+    .skill-tag.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .skill-tag.accent:hover { opacity: 0.85; color: #fff; }
+
+    /* ── Projects ────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+    .project-img {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-img.blue { background: linear-gradient(135deg, #dde8fb 0%, #c5d8f9 100%); }
+    .project-img.green { background: linear-gradient(135deg, #d9f0e2 0%, #b8e4ca 100%); }
+    .project-img.amber { background: linear-gradient(135deg, #fde8cc 0%, #fbd5a3 100%); }
+
+    .project-img i { font-size: 3rem; opacity: 0.55; }
+
+    .project-img-screenshot {
+      height: 150px;
+      overflow: hidden;
+      background: #f0f4ff;
+    }
+
+    .project-img-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .project-card:hover .project-img-screenshot img {
+      transform: scale(1.04);
+    }
+
+    .project-body {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .project-type {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .project-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .project-stack {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .stack-chip {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.03em;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+      padding: 2px 0;
+    }
+
+    .project-link:hover { color: var(--accent); }
+    .project-link i { font-size: 14px; }
+
+    /* ── Experience ──────────────────────────────── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .exp-item:first-child { padding-top: 0; }
+    .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .exp-role { font-size: 14.5px; font-weight: 600; margin-bottom: 3px; }
+
+    .exp-company {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .exp-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 6px;
+      max-width: 420px;
+      line-height: 1.65;
+    }
+
+    .exp-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 3px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      height: fit-content;
+    }
+
+    /* ── Nested Timeline (SMK-style) ────────────── */
+    .exp-item.has-nested { align-items: start; }
+
+    .exp-nested-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .exp-nested-company {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .exp-nested-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+    }
+
+    .exp-sub-list {
+      position: relative;
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Vertical connector line */
+    .exp-sub-list::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 1.5px;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 100%);
+      border-radius: 2px;
+    }
+
+    .exp-sub-item {
+      position: relative;
+      padding: 0 0 1.25rem 1rem;
+    }
+
+    .exp-sub-item:last-child { padding-bottom: 0; }
+
+    /* Dot on the line */
+    .exp-sub-item::before {
+      content: '';
+      position: absolute;
+      left: -13px;
+      top: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--accent);
+      z-index: 1;
+    }
+
+    .exp-sub-item:last-child::before {
+      border-color: var(--border);
+    }
+
+    .exp-sub-role {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .exp-sub-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .exp-sub-type i { font-size: 12px; }
+
+    .exp-sub-duration {
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      color: var(--muted);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+    .exp-sub-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 380px;
+    }
+
+    /* ── Experience Summary Card ─────────────────── */
+    .exp-summary {
+      background: var(--accent-light);
+      border: 1px solid rgba(45,91,227,0.15);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-summary-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .exp-summary-text strong {
+      color: var(--accent);
+      font-size: 15px;
+    }
+
+    .exp-summary-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .exp-summary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      color: var(--accent);
+      background: var(--white);
+      border: 1px solid rgba(45,91,227,0.2);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+
+    .exp-summary-chip i { font-size: 12px; }
+
+    /* ── Contact ─────────────────────────────────── */
+    .contact-card {
+      background: var(--ink);
+      border-radius: 20px;
+      padding: 2.75rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(45,91,227,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-text h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+      color: var(--cream);
+    }
+
+    .contact-text p { font-size: 13px; color: rgba(250,250,247,0.55); }
+
+    .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--cream);
+      text-decoration: none;
+      transition: all var(--transition);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .contact-link:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.12); transform: translateY(-1px); }
+    .contact-link i { font-size: 15px; }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; transition: color var(--transition); }
+    footer a:hover { color: var(--ink); }
+
+    /* ── Back to Top ─────────────────────────────── */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: 99;
+    }
+
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top:hover { opacity: 0.82; transform: translateY(-2px); }
+
+    /* ── Scroll Reveal ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.4,0,0.2,1), transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Divider ─────────────────────────────────── */
+    .section-divider {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { padding: 0.5rem 1.25rem 1rem; }
+
+      .hero {
+        padding: 3rem 1.25rem 2.5rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-avatar { order: -1; }
+      .avatar-ring { width: 100px; height: 100px; }
+      .avatar-initials { font-size: 2.2rem; }
+
+      .stats-bar { margin: 0; flex-wrap: wrap; }
+      .stat { flex: 1 1 50%; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .stat:nth-child(2n) { border-right: none; }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+
+      section { padding: 3rem 1.25rem; }
+      .section-divider { padding: 0 1.25rem; }
+
+      .about-grid { grid-template-columns: 1fr; }
+
+      .contact-card { padding: 2rem 1.5rem; }
+
+      footer { flex-direction: column; gap: 0.5rem; }
+
+      #back-to-top { bottom: 1.25rem; right: 1.25rem; }
+    }
+
+    @media (max-width: 460px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Absen.dev</a>
+    <div class="nav-links">
+      <a href="#tentang">Tentang</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#pengalaman">Pengalaman</a>
+    </div>
+    <a href="#kontak" class="nav-cta">Hubungi Saya</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation">
+    <a href="#tentang" onclick="closeMobileMenu()">Tentang</a>
+    <a href="#proyek" onclick="closeMobileMenu()">Proyek</a>
+    <a href="#pengalaman" onclick="closeMobileMenu()">Pengalaman</a>
+    <a href="#kontak" onclick="closeMobileMenu()">Hubungi Saya</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero" id="beranda">
+    <div class="hero-content">
+      <div class="hero-tag reveal"><span class="dot"></span> Tersedia untuk proyek baru</div>
+      <h1 class="reveal reveal-delay-1">Back-End Developer<br>yang membangun <em>sistem<br>jadi solusi</em></h1>
+      <p class="hero-sub reveal reveal-delay-2">Spesialis Back-End & ERP Developer dengan keahlian membangun API, mendesain database, dan mengembangkan sistem enterprise berbasis Frappe/ERPNext.</p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#proyek" class="btn-primary">Lihat Proyek <i class="ti ti-arrow-right"></i></a>
+        <a href="Muhamad Abisena Putrawan.pdf" download="Muhamad Abisena Putrawan.pdf" class="btn-secondary"><i class="ti ti-download"></i> Download CV</a>
+      </div>
+    </div>
+    <div class="hero-avatar reveal reveal-delay-2">
+      <div class="avatar-ring">
+        <img src="foto.png" alt="Muhamad Abisena Putrawan" class="avatar-photo" />
+      </div>
+      <div class="avatar-badge"><i class="ti ti-map-pin" style="font-size:10px; vertical-align:middle;"></i> Bogor, Indonesia</div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat reveal">
+      <div class="stat-num" id="stat-total-exp">—</div>
+      <div class="stat-label">Total Pengalaman</div>
+    </div>
+    <div class="stat reveal reveal-delay-1">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Proyek Selesai</div>
+    </div>
+    <div class="stat reveal reveal-delay-2">
+      <div class="stat-num">2023</div>
+      <div class="stat-label">Karir Dimulai</div>
+    </div>
+    <div class="stat reveal reveal-delay-3">
+      <div class="stat-num" style="font-size:1.1rem;color:#22c55e;">● Aktif</div>
+      <div class="stat-label">Status Kerja</div>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- About -->
+  <section id="tentang">
+    <h2 class="reveal reveal-delay-1">Halo, saya Muhamad Abisena Putrawan</h2>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-delay-1">
+        <p>Saya adalah seorang <strong>Back-End Developer & ERP Developer</strong> lulusan SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak, kini bekerja di <strong>Cakra Adhiperkasa Optima</strong>.</p>
+        <p>Berpengalaman membangun dan memelihara <strong>API backend</strong>, merancang arsitektur database, serta mengembangkan dan mengkustomisasi sistem <strong>ERPNext berbasis Frappe Framework</strong>.</p>
+        <p>Pernah terlibat dalam proyek nyata seperti pengembangan Sistem Manajemen Data (SIDATA) di SMK Wikrama Bogor dan magang sebagai Back-End Developer di <strong>PT. Exorty Indonesia</strong>.</p>
+      </div>
+      <div class="about-details reveal reveal-delay-2">
+        <div class="about-detail-item">
+          <i class="ti ti-briefcase"></i>
+          <div>
+            <span class="about-detail-label">Posisi Saat Ini</span>
+            <div class="about-detail-val">BackEnd & ERP Developer</div>
+          </div>
+        </div>
+        <div class="about-detail-item">
+          <i class="ti ti-building"></i>
+          <div>
+            <span class="about-detail-label">Perusahaan</span>
+            <div class="about-detail-val">Cakra Adhiperkasa Optima</div>
+          </div>
+        </div>
+        <div class="about-detail-item">
+          <i class="ti ti-school"></i>
+          <div>
+            <span class="about-detail-label">Pendidikan</span>
+            <div class="about-detail-val">SMK Wikrama Bogor — RPL, 2021–2024</div>
+          </div>
+        </div>
+        <div class="about-detail-item">
+          <i class="ti ti-language"></i>
+          <div>
+            <span class="about-detail-label">Bahasa</span>
+            <div class="about-detail-val">Indonesia, Sunda</div>
+          </div>
+        </div>
+        <div class="about-detail-item">
+          <i class="ti ti-clock"></i>
+          <div>
+            <span class="about-detail-label">Zona Waktu</span>
+            <div class="about-detail-val">WIB (UTC+7)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Skills -->
+  <section>
+    <h2 class="reveal reveal-delay-1">Tech Stack</h2>
+    <div class="skills-grid reveal reveal-delay-2">
+      <span class="skill-tag accent"><i class="ti ti-brand-nodejs"></i> Node.js</span>
+      <span class="skill-tag accent"><i class="ti ti-bolt"></i> Express.js</span>
+      <span class="skill-tag accent"><i class="ti ti-settings-automation"></i> ERPNext</span>
+      <span class="skill-tag"><i class="ti ti-brand-python"></i> Python</span>
+      <span class="skill-tag"><i class="ti ti-api"></i> FastAPI</span>
+      <span class="skill-tag"><i class="ti ti-database"></i> PostgreSQL</span>
+      <span class="skill-tag"><i class="ti ti-leaf"></i> MongoDB</span>
+      <span class="skill-tag"><i class="ti ti-code"></i> Golang</span>
+      <span class="skill-tag"><i class="ti ti-building-factory"></i> Frappe Framework</span>
+      <span class="skill-tag"><i class="ti ti-table"></i> DBeaver</span>
+      <span class="skill-tag"><i class="ti ti-api"></i> REST API</span>
+      <span class="skill-tag"><i class="ti ti-brand-git"></i> Git & GitHub</span>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Projects -->
+  <section id="proyek">
+    <h2 class="reveal reveal-delay-1">Proyek Terbaru</h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-img project-img-screenshot">
+          <img src="sidata.png" alt="SIDATA — Sistem Manajemen Data SMK Wikrama Bogor" />
+        </div>
+        <div class="project-body">
+          <div class="project-type">Sistem Informasi · Sekolah</div>
+          <div class="project-title">SIDATA — Sistem Manajemen Data SMK Wikrama Bogor</div>
+          <div class="project-desc">Membangun back-end sistem tatakelola data siswa, guru, dan inventaris sekolah. Merancang model database dan mengembangkan API untuk integrasi sisi server dan client.</div>
+          <div class="project-stack">
+            <span class="stack-chip">Node.js</span>
+            <span class="stack-chip">Express.js</span>
+            <span class="stack-chip">PostgreSQL</span>
+            <span class="stack-chip">REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://sidata.smkwikrama.sch.id" target="_blank" rel="noopener" class="project-link"><i class="ti ti-external-link"></i> Live Site</a>
+            <a href="#" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-img project-img-screenshot">
+          <img src="exorty.png" alt="Backend API PT. Exorty Indonesia" />
+        </div>
+        <div class="project-body">
+          <div class="project-type">Backend API · Internship</div>
+          <div class="project-title">Backend API — PT. Exorty Indonesia</div>
+          <div class="project-desc">Mengelola dan merancang database sesuai kebutuhan bisnis, serta mengembangkan API untuk mengintegrasikan sisi server dan client pada sistem internal perusahaan.</div>
+          <div class="project-stack">
+            <span class="stack-chip">Node.js</span>
+            <span class="stack-chip">Express.js</span>
+            <span class="stack-chip">MongoDB</span>
+            <span class="stack-chip">REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-img project-img-screenshot">
+          <img src="erp-cakra.png" alt="Kustomisasi ERP Cakra Adhiperkasa Optima" />
+        </div>
+        <div class="project-body">
+          <div class="project-type">ERP Development · Full-time</div>
+          <div class="project-title">Kustomisasi ERP — Cakra Adhiperkasa Optima</div>
+          <div class="project-desc">Mengembangkan dan mengkustomisasi modul ERP berbasis Frappe/ERPNext, membuat Query Report, mengintegrasikan sistem dengan API eksternal, serta maintenance server ERP.</div>
+          <div class="project-stack">
+            <span class="stack-chip">ERPNext</span>
+            <span class="stack-chip">Frappe</span>
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-img project-img-screenshot">
+          <img src="erp-hr.png" alt="ERP HR Human Resource Management" />
+        </div>
+        <div class="project-body">
+          <div class="project-type">ERP Module · HR Management</div>
+          <div class="project-title">ERP HR — Human Resource Management</div>
+          <div class="project-desc">Modul manajemen sumber daya manusia berbasis ERPNext mencakup pengelolaan karyawan, absensi, penggajian, dan laporan HR untuk kebutuhan perusahaan.</div>
+          <div class="project-stack">
+            <span class="stack-chip">ERPNext</span>
+            <span class="stack-chip">Frappe</span>
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://imogi-dev.j.frappe.cloud/app/towing-imogi" target="_blank" rel="noopener" class="project-link"><i class="ti ti-external-link"></i> Live Site</a>
+            <a href="https://github.com/Abisena/Payroll-Indonesia" target="_blank" rel="noopener" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-img project-img-screenshot">
+          <img src="imogi-workshop.png" alt="IMOGI Workshop Sistem Manajemen Workshop" />
+        </div>
+        <div class="project-body">
+          <div class="project-type">Sistem Informasi · Workshop</div>
+          <div class="project-title">IMOGI Workshop — Sistem Manajemen Workshop</div>
+          <div class="project-desc">Sistem manajemen workshop yang mengelola data servis, jadwal teknisi, inventaris spare part, dan laporan pekerjaan secara terintegrasi.</div>
+          <div class="project-stack">
+            <span class="stack-chip">ERPNext</span>
+            <span class="stack-chip">Frappe</span>
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://imogi-dev.j.frappe.cloud/app/towing-imogi" target="_blank" rel="noopener" class="project-link"><i class="ti ti-external-link"></i> Live Site</a>
+            <a href="https://github.com/Abisena/Car-Workshop" target="_blank" rel="noopener" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-img project-img-screenshot">
+          <img src="pos.png" alt="POS Sistem Point of Sale" />
+        </div>
+        <div class="project-body">
+          <div class="project-type">Point of Sale · Retail</div>
+          <div class="project-title">POS — Sistem Point of Sale</div>
+          <div class="project-desc">Aplikasi kasir berbasis web untuk transaksi penjualan, manajemen stok barang, laporan penjualan harian, dan integrasi pembayaran yang cepat dan akurat.</div>
+          <div class="project-stack">
+            <span class="stack-chip">ERPNext</span>
+            <span class="stack-chip">Frappe</span>
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://imogi-dev.j.frappe.cloud/app/towing-imogi" target="_blank" rel="noopener" class="project-link"><i class="ti ti-external-link"></i> Live Site</a>
+            <a href="https://github.com/Abisena/IMOGI-POS" target="_blank" rel="noopener" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Experience -->
+  <section id="pengalaman">
+    <h2 class="reveal reveal-delay-1">Riwayat Kerja</h2>
+
+    <!-- Experience Summary Card -->
+    <div class="exp-summary reveal reveal-delay-2" id="exp-summary-card">
+      <div class="exp-summary-text">
+        Total akumulasi pengalaman kerja<br>
+        <strong id="exp-total-display">Menghitung...</strong>
+      </div>
+      <div class="exp-summary-chips" id="exp-chips">
+        <span class="exp-summary-chip"><i class="ti ti-briefcase"></i> <span id="chip-exorty">Exorty — 6 bln</span></span>
+        <span class="exp-summary-chip"><i class="ti ti-code"></i> <span id="chip-sidata">SIDATA — 3 bln</span></span>
+        <span class="exp-summary-chip"><i class="ti ti-school"></i> <span id="chip-laboran">Laboran — 12 bln</span></span>
+        <span class="exp-summary-chip" style="border-color:rgba(34,197,94,0.35);color:#16a34a;background:#f0fdf4;"><i class="ti ti-building"></i> <span id="chip-cakra">Cakra — menghitung...</span></span>
+      </div>
+    </div>
+
+    <div class="exp-list">
+
+      <div class="exp-item reveal reveal-delay-1">
+        <div>
+          <div class="exp-role">BackEnd Developer & ERP Developer</div>
+          <div class="exp-company"><i class="ti ti-building" style="font-size:13px;"></i> Cakra Adhiperkasa Optima · Full-time</div>
+          <div class="exp-desc">Mengembangkan dan memelihara API backend, mendesain arsitektur database, serta mengkustomisasi modul ERP (Doctype, Workflow, Script, Report) berbasis Frappe/ERPNext untuk kebutuhan bisnis perusahaan.</div>
+        </div>
+        <div class="exp-year">Jul 2025 — Kini</div>
+      </div>
+
+      <div class="exp-item has-nested reveal reveal-delay-2">
+        <div>
+          <div class="exp-nested-header">
+            <i class="ti ti-school" style="font-size:15px;color:var(--accent);"></i>
+            <span class="exp-nested-company">SMK Wikrama Bogor</span>
+            <span class="exp-nested-badge">2 Peran</span>
+          </div>
+          <div class="exp-sub-list">
+
+            <div class="exp-sub-item">
+              <div class="exp-sub-role">Laboran PPLG</div>
+              <div class="exp-sub-type"><i class="ti ti-device-desktop"></i> Asisten Laboran · Part-time</div>
+              <div class="exp-sub-duration">1 Tahun &nbsp;·&nbsp; Jul 2024 — Jul 2025</div>
+              <div class="exp-sub-desc">Mengelola laboratorium komputer jurusan PPLG, membimbing siswa dalam praktik pemrograman, serta melakukan pengembangan dan pemeliharaan sistem database sekolah.</div>
+            </div>
+
+            <div class="exp-sub-item">
+              <div class="exp-sub-role">Back-End Developer — Project SIDATA</div>
+              <div class="exp-sub-type"><i class="ti ti-code"></i> Back-End Developer · Freelance</div>
+              <div class="exp-sub-duration">3 Bulan &nbsp;·&nbsp; Okt 2023 — Des 2023</div>
+              <div class="exp-sub-desc">Merancang model database (student, guru, inventaris), mengembangkan API untuk integrasi server-client pada Sistem Manajemen Data SMK Wikrama Bogor (SIDATA) bersama tim.</div>
+            </div>
+
+          </div>
+        </div>
+        <div class="exp-year">Okt 2023 — Jul 2025</div>
+      </div>
+
+      <div class="exp-item reveal reveal-delay-3">
+        <div>
+          <div class="exp-role">Back-End Developer</div>
+          <div class="exp-company"><i class="ti ti-building-factory-2" style="font-size:13px;"></i> PT. Exorty Indonesia · Internship</div>
+          <div class="exp-desc">Mengelola dan merancang database sesuai kebutuhan sistem, serta mengembangkan API untuk mengintegrasikan sisi server dan client pada platform internal perusahaan.</div>
+        </div>
+        <div class="exp-year">Jan 2023 — Jul 2023</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Contact -->
+  <section id="kontak">
+    <div class="contact-card reveal">
+      <div class="contact-text">
+        <h3>Mari Berkolaborasi</h3>
+        <p>Punya proyek menarik? Saya siap mendengar ideamu.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:abisena1123@gmail.com" class="contact-link"><i class="ti ti-mail"></i> Email</a>
+        <a href="https://www.linkedin.com/in/muhamad-abisena-putrawan-504b92292/" target="_blank" rel="noopener" class="contact-link"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/Abisena" target="_blank" rel="noopener" class="contact-link"><i class="ti ti-brand-github"></i> GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2025 Absen.dev</span>
+    <span>·</span>
+    <a href="#beranda">Kembali ke atas</a>
+    <span>·</span>
+    <span>Crafted with care in Bogor, ID</span>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="Kembali ke atas" title="Kembali ke atas">
+    <i class="ti ti-arrow-up"></i>
+  </button>
+
+  <script>
+    /* ── Scroll Progress ─────────────────────── */
+    const progressBar = document.getElementById('progress-bar');
+    function updateProgress() {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    }
+
+    /* ── Back to Top ─────────────────────────── */
+    const backToTop = document.getElementById('back-to-top');
+    function updateBackToTop() {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    }
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ── Active Nav Link ─────────────────────── */
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = ['beranda', 'tentang', 'proyek', 'pengalaman', 'kontak'];
+
+    function updateActiveNav() {
+      const scrollY = window.scrollY + 120;
+      let current = 'beranda';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+      });
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        link.classList.toggle('active', href === current);
+      });
+    }
+
+    /* ── Scroll Reveal ───────────────────────── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ── Hamburger Menu ──────────────────────── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    /* ── Scroll listener ─────────────────────── */
+    window.addEventListener('scroll', () => {
+      updateProgress();
+      updateBackToTop();
+      updateActiveNav();
+    }, { passive: true });
+
+    /* ── Initial trigger for hero reveals ─── */
+    document.querySelectorAll('.hero .reveal, .stats-bar .reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+
+    /* ── Kalkulasi Total Pengalaman Kerja ────────
+     *  Setiap entry = { label, start: [year, month], end: [year, month] | null }
+     *  end: null  → sedang berjalan (pakai tanggal hari ini)
+     *  Bulan dihitung: (endYear*12 + endMonth) - (startYear*12 + startMonth)
+     *  dengan end bersifat "eksklusif" (bulan setelah bulan terakhir kerja)
+     * ─────────────────────────────────────────── */
+    const workPeriods = [
+      // PT. Exorty Indonesia — Jan 2023 s/d mid-Jul 2023 (~6 bln)
+      { id: 'exorty',  label: 'Exorty',  start: [2023, 1],  end: [2023, 7]  },
+      // SIDATA — Okt 2023 s/d Des 2023 (3 bln: Okt, Nov, Des → end=Jan 2024)
+      { id: 'sidata',  label: 'SIDATA',  start: [2023, 10], end: [2024, 1]  },
+      // Laboran PPLG — Jul 2024 s/d Jul 2025 (12 bln)
+      { id: 'laboran', label: 'Laboran', start: [2024, 7],  end: [2025, 7]  },
+      // Cakra Adhiperkasa — Jul 2025 s/d sekarang (sedang berjalan)
+      { id: 'cakra',   label: 'Cakra',   start: [2025, 7],  end: null       },
+    ];
+
+    function calcMonths(start, end) {
+      const now = new Date();
+      const endY = end ? end[0] : now.getFullYear();
+      const endM = end ? end[1] : now.getMonth() + 1; // getMonth() is 0-based
+      return (endY * 12 + endM) - (start[0] * 12 + start[1]);
+    }
+
+    function formatDuration(months) {
+      const y = Math.floor(months / 12);
+      const m = months % 12;
+      if (y === 0) return `${m} bln`;
+      if (m === 0) return `${y} thn`;
+      return `${y} thn ${m} bln`;
+    }
+
+    function formatTotalLong(months) {
+      const y = Math.floor(months / 12);
+      const m = months % 12;
+      const parts = [];
+      if (y > 0) parts.push(`<strong>${y} Tahun</strong>`);
+      if (m > 0) parts.push(`<strong>${m} Bulan</strong>`);
+      return parts.join(' ') + ` dari <strong>${workPeriods.length} posisi</strong>`;
+    }
+
+    (function renderExpStats() {
+      let totalMonths = 0;
+
+      workPeriods.forEach(p => {
+        const months = calcMonths(p.start, p.end);
+        totalMonths += months;
+
+        // Update chip label
+        const chip = document.getElementById('chip-' + p.id);
+        if (chip) chip.textContent = `${p.label} — ${formatDuration(months)}`;
+      });
+
+      // Update summary card
+      const display = document.getElementById('exp-total-display');
+      if (display) display.innerHTML = formatTotalLong(totalMonths);
+
+      // Update stats bar "Total Pengalaman"
+      const statEl = document.getElementById('stat-total-exp');
+      if (statEl) {
+        const y = Math.floor(totalMonths / 12);
+        const m = totalMonths % 12;
+        statEl.textContent = y > 0 ? `${y}+ Thn` : `${m} Bln`;
+      }
+    })();
+  </script>
+
+</body>
+</html>
