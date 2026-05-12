@@ -593,6 +593,14 @@
     .project-link:hover { color: var(--accent); }
     .project-link i { font-size: 14px; }
 
+    .project-link-private {
+      color: var(--border);
+      cursor: default;
+      font-style: italic;
+    }
+
+    .project-link-private:hover { color: var(--border); }
+
     /* ── Experience ──────────────────────────────── */
     .exp-list { display: flex; flex-direction: column; gap: 0; }
 
@@ -964,7 +972,7 @@
 
   <!-- Navigation -->
   <nav id="navbar">
-    <a href="#" class="nav-logo">Absen.dev</a>
+    <a href="/" class="nav-logo">Absen.dev</a>
     <div class="nav-links">
       <a href="#tentang">Tentang</a>
       <a href="#proyek">Proyek</a>
@@ -1118,7 +1126,7 @@
           </div>
           <div class="project-links">
             <a href="https://sidata.smkwikrama.sch.id" target="_blank" rel="noopener" class="project-link"><i class="ti ti-external-link"></i> Live Site</a>
-            <a href="#" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+            <span class="project-link project-link-private"><i class="ti ti-lock"></i> Private</span>
           </div>
         </div>
       </div>
@@ -1138,7 +1146,7 @@
             <span class="stack-chip">REST API</span>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+            <span class="project-link project-link-private"><i class="ti ti-lock"></i> Private</span>
           </div>
         </div>
       </div>
@@ -1158,7 +1166,7 @@
             <span class="stack-chip">PostgreSQL</span>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link"><i class="ti ti-brand-github"></i> GitHub</a>
+            <span class="project-link project-link-private"><i class="ti ti-lock"></i> Private</span>
           </div>
         </div>
       </div>
